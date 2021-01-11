@@ -1,0 +1,81 @@
+allprojects {
+    kod depoları {
+        Google()
+    }
+}bağımlılıklar {
+    uygulama fileTree (dir: 'libs', şunları içerir: ['* .jar'])
+    uygulama 'androidx.appcompat: appcompat: 1.0.2'
+    uygulama 'com.google.android.gms: play-services-ads: 19.6.0'
+}<manifest>
+    <uygulama>
+        <! - Örnek AdMob uygulama kimliği: ca-app-pub-3940256099942544 ~ 3347511713 ->
+        <meta-veri
+            android: name = "com.google.android.gms.ads.APPLICATION_ID"
+            android: value = " ca-app-pub-5138876083707428~5855034126 " />
+    </application>
+</manifest>package ...
+import ...
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+
+public class MainActivity extends AppCompatActivity {
+
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+    }
+}
+buildscript {
+    repositories {
+        // Check that you have Google's Maven repository (if not, add it).
+        google()
+    }
+
+    dependencies {
+        // ...
+
+        // Check that you have the Google Services Gradle plugin v4.3.2 or later
+        // (if not, add it).
+        classpath 'com.google.gms:google-services:4.3.4'
+
+        // Add the Crashlytics Gradle plugin (be sure to add version
+        // 2.0.0 or later if you built your app with Android Studio 4.1).
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.4.1'
+    }dependencies {
+    // Import the BoM for the Firebase platform
+    implementation platform('com.google.firebase:firebase-bom:26.2.0')
+
+    // Declare the dependencies for the Crashlytics and Analytics libraries
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-crashlytics'
+    implementation 'com.google.firebase:firebase-analytics'
+}
+}
+
+allprojects {
+    repositories {
+        // Check that you have Google's Maven repository (if not, add it).
+        google()
+    }
+}
+apply plugin: 'com.android.application'
+
+apply plugin: 'com.google.gms.google-services' // Google Services Gradle plugin
+
+// Apply the Crashlytics Gradle plugin
+apply plugin: 'com.google.firebase.crashlytics'
+dependencies {
+   // Import the BoM for the Firebase platform
+   implementation platform('com.google.firebase:firebase-bom:26.2.0')
+
+   // Declare the dependencies for the Crashlytics and Analytics libraries
+   // When using the BoM, you don't specify versions in Firebase library dependencies
+   implementation 'com.google.firebase:firebase-crashlytics'
+   implementation 'com.google.firebase:firebase-anal"
